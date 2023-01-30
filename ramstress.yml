@@ -1,0 +1,12 @@
+# Begin prepare stress nodes.yml
+---
+- name: stress ram
+  hosts: stress_nodes
+  gather_facts: no
+  become: yes
+  become_method: sudo
+  tasks:
+    - shell: "(/usr/bin/stress-ng --vm 2 --vm-bytes 95% --vm-method all --verify -t 1h  >/dev/null 2>&1 &)"
+      async: 10
+      poll: 0
+# End prep.yaml

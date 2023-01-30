@@ -1,0 +1,15 @@
+# Begin prepare stress nodes.yml
+---
+- name: prepare stress nodes
+  hosts: stress_nodes
+  become: yes
+  become_method: sudo
+  tasks:
+    - name: update all repository
+      ansible.builtin.command: apt-get update --allow-releaseinfo-change
+    - name: install stress
+      apt:
+        name: stress,vim,curl,stress-ng
+        state: present
+        update_cache: yes
+# End prep.yaml
